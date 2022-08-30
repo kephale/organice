@@ -112,13 +112,15 @@ function GitLab() {
 
   const defaultProject = 'https://gitlab.com/your/project';
   const [project, setProject] = useState(defaultProject);
+  const react_id = process.env.REACT_APP_GITLAB_CLIENT_ID;
+  const react_secret = process.env.REACT_APP_GITLAB_SECRET;
   const handleSubmit = (evt) => {
     const [hostname, projectId] = gitLabProjectIdFromURL(project);
     if (projectId) {
       persistField('authenticatedSyncService', 'GitLab');
       persistField('gitLabHost', hostname);
       persistField('gitLabProject', projectId);
-      createGitlabOAuth().fetchAuthorizationCode();
+      createGitlabOAuth(react_id, react_secret).fetchAuthorizationCode();
     } else {
       evt.preventDefault();
       alert('Project does not appear to be a valid gitlab.com URL');
@@ -142,22 +144,26 @@ function GitLab() {
               value={project}
               onChange={(e) => setProject(e.target.value)}
             />
-            <label htmlFor="input-gitlab-react-id">Gitlab react ID:</label>
+            </p>
+          <p>
+            <label htmlFor="input-gitlab-react-id">GitLab react ID:</label>
             <input
               id="input-gitlab-react-id"
               type="url"
               className="textfield"
-              placeholder={1234567890abcdef1235467890}
-              value={react-id}
+              placeholder={'1234567890abcdef1235467890'}
+              value={react_id}
               onChange={(e) => setProject(e.target.value)}
             />
-            <label htmlFor="input-gitlab-react-secret">Gitlab react secret:</label>
+            </p>
+            <p>
+            <label htmlFor="input-gitlab-react-secret">GitLab react secret:</label>
             <input
               id="input-gitlab-react-secret"
               type="url"
               className="textfield"
-              placeholder={1234567890abcdef1235467890}
-              value={react-secret}
+              placeholder={'1234567890abcdef1235467890'}
+              value={react_secret}
               onChange={(e) => setProject(e.target.value)}
             />
           </p>
