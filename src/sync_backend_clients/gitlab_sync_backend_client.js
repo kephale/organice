@@ -5,7 +5,7 @@ import { getPersistedField } from '../util/settings_persister';
 
 import { fromJS, Map } from 'immutable';
 
-export const createGitlabOAuth = () => {
+export const createGitlabOAuth = (react_id, react_secret) => {
   // Use promises as mutex to prevent concurrent token refresh attempts, which causes problems.
   // More info: https://github.com/BitySA/oauth2-auth-code-pkce/issues/29
   // TODO: remove this workaround if/when oauth2-auth-code-pkce fixes the issue.
@@ -14,11 +14,11 @@ export const createGitlabOAuth = () => {
   return new OAuth2AuthCodePKCE({
     authorizationUrl: `https://${getPersistedField('gitLabHost')}/oauth/authorize`,
     tokenUrl: `https://${getPersistedField('gitLabHost')}/oauth/token`,
-    clientId: process.env.REACT_APP_GITLAB_CLIENT_ID,
+    clientId: react_id,
     redirectUrl: window.location.origin,
     scopes: ['api'],
     extraAuthorizationParams: {
-      clientSecret: process.env.REACT_APP_GITLAB_SECRET,
+      clientSecret: react_secret,
     },
     onAccessTokenExpiry: async (refreshToken) => {
       if (!expiryPromise) {

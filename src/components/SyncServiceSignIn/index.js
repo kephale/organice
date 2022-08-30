@@ -142,6 +142,24 @@ function GitLab() {
               value={project}
               onChange={(e) => setProject(e.target.value)}
             />
+            <label htmlFor="input-gitlab-react-id">Gitlab react ID:</label>
+            <input
+              id="input-gitlab-react-id"
+              type="url"
+              className="textfield"
+              placeholder={1234567890abcdef1235467890}
+              value={react-id}
+              onChange={(e) => setProject(e.target.value)}
+            />
+            <label htmlFor="input-gitlab-react-secret">Gitlab react secret:</label>
+            <input
+              id="input-gitlab-react-secret"
+              type="url"
+              className="textfield"
+              placeholder={1234567890abcdef1235467890}
+              value={react-secret}
+              onChange={(e) => setProject(e.target.value)}
+            />
           </p>
           <input type="submit" value="Sign-in" />
         </form>
