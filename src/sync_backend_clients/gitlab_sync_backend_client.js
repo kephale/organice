@@ -175,6 +175,7 @@ export default (oauthClient) => {
     const [userResponse, membersResponse] = await Promise.all([
       // https://docs.gitlab.com/ee/api/users.html#list-current-user-for-normal-users
       decoratedFetch(`${getApiUrl()}/user`),
+
       // https://docs.gitlab.com/ee/api/members.html#list-all-members-of-a-group-or-project
       decoratedFetch(`${getProjectApi()}/members`),
     ]);

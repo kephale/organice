@@ -170,6 +170,8 @@ class HeaderBar extends PureComponent {
         return this.renderSignInBackButton();
       case 'settings':
         return this.renderFileBrowserBackButton();
+      case 'changelog':
+        return this.renderFileBrowserBackButton();
       default:
         return <div />;
     }
@@ -302,10 +304,12 @@ class HeaderBar extends PureComponent {
           {isAuthenticated && (
             <div>
               {hasUnseenChangelog && (
-                <i
-                  className="changelog-icon--has-unseen-changelog header-bar__actions__item fas fa-gift"
-                  onClick={this.handleChangelogClick}
-                />
+                <Link to="/changelog">
+                  <i
+                    className="changelog-icon--has-unseen-changelog header-bar__actions__item fas fa-gift"
+                    title="Changelog"
+                  />
+                </Link>
               )}
               <Link to="/settings" onClick={this.handleSettingsClick}>
                 <i className={settingsIconClassName} title="Settings" />
